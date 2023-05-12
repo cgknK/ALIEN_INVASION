@@ -17,8 +17,10 @@ class AlienInvasion:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Alien Invasion")
+            (self.settings.screen_width, self.settings.screen_height)
+            )
+        self.value_current_window = self.settings.value_current_window
+        pygame.display.set_caption(self.value_current_window)
 
         # self.ship'i olması için self'in olması gerekiyor. self'in olması için
         #de self.ship'in olması gerekiyor. Python burada C++'daki member init'i
