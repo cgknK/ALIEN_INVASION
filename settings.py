@@ -19,4 +19,7 @@ class Settings:
         self.screen_height = resulutions[0][1]
         self.value_current_window = "Alien Invasion"
         self.bg_color = bg_colors['blue']
+
+        # Ship settings
+        self.ship_speed = 1.5
         self.image_path = image_paths['ship']
