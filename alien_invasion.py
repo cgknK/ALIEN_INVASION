@@ -25,6 +25,7 @@ class AlienInvasion:
         # self.ship'i olması için self'in olması gerekiyor. self'in olması için
         #de self.ship'in olması gerekiyor. Python burada C++'daki member init'i
         #mi kullanıyor? -implictly olarak-
+        #self.ship in en sonda mı olması gerekiyor?Çünkü Ship(AlienInvasion)?
         self.ship = Ship(self)
 
     def run_game(self):
@@ -33,6 +34,7 @@ class AlienInvasion:
         while True:
             # Watch for keyboard and mouse events.
             self._check_events()
+            self.ship.update()
             self._update_screen()
 
     def _check_events(self):
@@ -41,6 +43,22 @@ class AlienInvasion:
                 if event.type == pygame.QUIT:
                     # bu exit() c/c++ daki exit()-abort()- gibi mi?
                     sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    """We can use elif blocks here because each event is 
+                    connected to only one key. If the player presses both keys 
+                    at once, two separate events will be detected. _Anlamadım
+                    Ama elifleri if yapncada aynı şekilde çalışıyor
+                    """
+                    if event.key == pygame.K_RIGHT:
+                        # Move the ship to the right.
+                        self.ship.moving_right = True
+                    elif event.key == pygame.K_LEFT:
+                        self.ship.moving_left = True
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
+                    elif event.key == pygame.K_LEFT:
+                        self.ship.moving_left = False
 
     def _update_screen(self):
         """Redraw the screen during each pass through the loop."""
