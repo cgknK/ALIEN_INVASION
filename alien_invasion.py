@@ -110,10 +110,10 @@ class AlienInvasion:
         elif event.key == pygame.K_q:
             sys.exit()
         elif event.key == pygame.K_p and not self.stats.game_active:
-            _start_game()
+            self._start_game()
 
     def _check_keyup_events(self, event):
-         """Respond to key releases."""
+        """Respond to key releases."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
