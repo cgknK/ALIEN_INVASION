@@ -3,6 +3,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 class AlienInvasion:
     """
@@ -28,6 +29,8 @@ class AlienInvasion:
         #self.ship in en sonda mı olması gerekiyor?Çünkü Ship(AlienInvasion)?
         self.ship = Ship(self)
 
+        self.bullets = pygame.sprite.Group()
+
     def run_game(self):
         """Start the main loop for the game."""
 
@@ -35,6 +38,7 @@ class AlienInvasion:
             # Watch for keyboard and mouse events.
             self._check_events()
             self.ship.update()
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):
@@ -64,6 +68,8 @@ class AlienInvasion:
             self.ship.moving_up = True
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = True
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
         elif event.key == pygame.K_q:
             sys.exit()
 
@@ -77,12 +83,43 @@ class AlienInvasion:
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = False
 
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        self.bullets.update()
+
+        # Get rid of bullets that have disappeared.
+        # When you use a for loop with a list (or a group in Pygame), 
+        #Python expects that the list will stay the same length as long as 
+        #the loop is running.
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                # Buradaki remove destucre'ı nasıl çağırıyor?
+                self.bullets.remove(bullet)
+
+        """
+        If you leave it in, the game will slow down significantly because 
+        it takes more time to write output to the terminal than it does to 
+        draw graphics to the game window.
+        _Neden terminale birşey yazdırmak daha çok zaman alıyor?
+        """
+        #print(len(self.bullets))
+
+
     def _update_screen(self):
         """Redraw the screen during each pass through the loop."""
         #bu fill() methodu nereden geliyor?(pygame.display mı?)
         #sanki pygame.display.fill() olmalıymış gibi geliyor mantığı düzelt
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 
