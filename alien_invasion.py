@@ -74,6 +74,9 @@ class AlienInvasion:
 
     def _start_game(self):
         """Start a new game."""
+        # Reset the game settings.
+        self.settings.initialize_dynamic_settings()
+
         # Reset the game statistics.
         self.stats.reset_stats()
         self.stats.game_active = True
@@ -162,7 +165,12 @@ class AlienInvasion:
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
+            self.settings.increase_speed()
             self._create_fleet()
+            # increase_speed() _create_fleet()'in altında olmasına rağmen
+            #nasıl çoktan örneği oluşturulmuş nesnelere etki ediyor?
+            #Anladım ama yinede yukarısında tanımlanması daha mantıklı değil mi?
+            #self.settings.increase_speed()
 
     def _update_aliens(self):
         """Check if the fleet is at an edge, 
