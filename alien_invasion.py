@@ -90,6 +90,9 @@ class AlienInvasion:
             self._create_fleet()
             self.ship.center_ship()
 
+            # Hide the mouse cursor.
+            pygame.mouse.set_visible(False)
+
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
         """We can use elif blocks here because each event is 
@@ -110,6 +113,8 @@ class AlienInvasion:
             self._fire_bullet()
         elif event.key == pygame.K_q:
             sys.exit()
+        # elif event.key == pygame.K_ENTER:
+          #p veya enter ile play   
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -194,6 +199,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
