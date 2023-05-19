@@ -24,6 +24,7 @@ class Settings:
         # Ship settings
         self.ship_speed = 0.6
         self.image_path = image_paths['ship']
+        self.ship_limit = 3
 
         # Bullet settings
         self.bullets = [ [3, 15], [300, 15], [3000, 15] ]
@@ -34,6 +35,6 @@ class Settings:
 
         # Alien settings
         self.alien_speed = 0.25
-        self.fleet_drop_speed = 9
+        self.fleet_drop_speed = 50
         # fleet_direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1
