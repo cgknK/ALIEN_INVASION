@@ -5,6 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
 from bullet import Bullet
@@ -23,8 +24,9 @@ class AlienInvasion:
         self.value_current_window = self.settings.value_current_window
         pygame.display.set_caption(self.value_current_window)
 
-        # Create an instance to store game statistics.
+        # Create an instance to store game statistics, and create a scoreboard.
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         # self.ship'i olması için self'in olması gerekiyor. self'in olması için
         #de self.ship'in olması gerekiyor. Python burada C++'daki member init'i
@@ -290,6 +292,9 @@ class AlienInvasion:
             bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
+
+        # Draw the score information.
+        self.sb.show_score()
 
         # Draw the play button if the game is inactive.
         if not self.stats.game_active:
