@@ -6,6 +6,7 @@ class Settings:
         bg_colors = {
             'grey' : (230, 230, 230),
             'blue' : (40, 160, 200),
+            'white' : (250, 250, 250)
             }
 
         resulutions = [ (800, 600), (500, 500)]
@@ -18,7 +19,7 @@ class Settings:
         self.screen_width = resulutions[0][0]
         self.screen_height = resulutions[0][1]
         self.value_current_window = "Alien Invasion"
-        self.bg_color = bg_colors['blue']
+        self.bg_color = bg_colors['grey']
 
         # Ship settings
         self.ship_speed = 1.5
