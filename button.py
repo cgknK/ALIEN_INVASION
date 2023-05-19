@@ -4,7 +4,6 @@ class Button:
 
     def __init__(self, ai_game, msg):
         """Initialize button attributes."""
-
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
 
@@ -20,7 +19,7 @@ class Button:
 
         # The button message needs to be prepped only once.
         self._prep_msg(msg)
-    
+
     def _prep_msg(self, msg):
         """Turn msg into a rendered image and center text on the button."""
         self.msg_image = self.font.render(msg, True, 

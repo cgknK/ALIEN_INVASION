@@ -16,6 +16,7 @@ class Settings:
             'figure' : 'images/figure.bmp',
             }
 
+        # Screen settings
         self.screen_width = resulutions[0][0]
         self.screen_height = resulutions[0][1]
         self.value_current_window = "Alien Invasion"
