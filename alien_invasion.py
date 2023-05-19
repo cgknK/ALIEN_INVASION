@@ -37,7 +37,17 @@ class AlienInvasion:
         self._create_fleet()
 
         #  Make the Play button.
-        self.play_button = Button(self, "Play")
+        self.play_button = Button(self, "Play", 0)
+
+        # Make difficulty buttons.
+        self._make_difficulty_buttons()
+
+    def _make_difficulty_buttons(self):
+        """Make buttons that allow player to select difficulty level."""
+        # Make the Easy_Level button.-default-
+        self.easy_button = Button(self, "Easy Level", 1)
+        # Make the Hard_Level button.
+        self.hard_button = Button(self, "Hard Level", 2)
 
     def run_game(self):
         """Start the main loop for the game."""
@@ -65,12 +75,22 @@ class AlienInvasion:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     self._check_play_button(mouse_pos)
+                    self._check_difficulty_buttons(mouse_pos)
 
     def _check_play_button(self, mouse_pos):
         """Start a new game when the player clicks Play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
             self._start_game()
+
+    def _check_difficulty_buttons(self, mouse_pos):
+        """Set the appropriate difficulty level."""
+        easy_button_clicked = self.easy_button.rect.collidepoint(mouse_pos)
+        hard_button_clicked = self.hard_button.rect.collidepoint(mouse_pos)
+        if easy_button_clicked:
+            self.settings.difficulty_level = 'easy'
+        elif hard_button_clicked:
+            self.settings.difficulty_level = 'hard'
 
     def _start_game(self):
         """Start a new game."""
@@ -273,10 +293,15 @@ class AlienInvasion:
 
         # Draw the play button if the game is inactive.
         if not self.stats.game_active:
-            self.play_button.draw_button()
+            self._draw_buttons()
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()
+
+    def _draw_buttons(self):
+        self.play_button.draw_button()
+        self.easy_button.draw_button()
+        self.hard_button.draw_button()
 
 
 if __name__ == '__main__':
