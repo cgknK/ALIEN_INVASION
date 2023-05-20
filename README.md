@@ -6,6 +6,9 @@ test_
 gemi soldan sağa ve sağdan sola geçişlilik özelliği eklenecek
 import this "python zen"
 PEP 8
+pygame.mixer
+random uzaylılar gemiye ateş açacak(mermi hızı alien_dropdan hızlı olmalı)
+Help butonu eklenecek
 
 _helper_methot ne?
 _check_events()'deki elifler nasıl her biri ayrı if gibi çalışıyor?
