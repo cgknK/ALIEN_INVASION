@@ -4,6 +4,7 @@ Eric Matthes,
 
 test_
 gemi soldan sağa ve sağdan sola geçişlilik özelliği eklenecek
+import this "python zen"
 
 _helper_methot ne?
 _check_events()'deki elifler nasıl her biri ayrı if gibi çalışıyor?
