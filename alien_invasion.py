@@ -1,5 +1,6 @@
 import sys
 from time import sleep
+import json
 
 import pygame
 
@@ -68,8 +69,7 @@ class AlienInvasion:
         """"Respond to keypresses and mouse events."""
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    # bu exit() c/c++ daki exit()-abort()- gibi mi?
-                    sys.exit()
+                    self._save_and_exit()
                 elif event.type == pygame.KEYDOWN:
                     self._check_keydown_events(event)
                 elif event.type == pygame.KEYUP:
@@ -136,9 +136,22 @@ class AlienInvasion:
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key == pygame.K_q:
-            sys.exit()
+            self._save_and_exit()
         elif event.key == pygame.K_p and not self.stats.game_active:
             self._start_game()
+
+    def _save_and_exit(self):
+        """Save high score and exit."""
+
+        # Her zaman dosya yazma maliyetinden kaçınmak için if kullanılabilinir
+        #try:
+        with open('high_score.json', 'w') as f:
+            json.dump(self.stats.high_score, f)
+        # Tüm exceptler nasıl yakalanır?
+        #except:
+
+        # bu exit() c/c++ daki exit()-abort()- gibi mi?
+        sys.exit()
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
