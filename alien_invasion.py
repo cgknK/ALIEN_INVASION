@@ -1,6 +1,7 @@
 import sys
 from time import sleep
 import json
+from random import randint
 
 import pygame
 
@@ -9,7 +10,7 @@ from game_stats import GameStats
 from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
-from bullet import Bullet
+from bullet import Bullet, AlienBullet
 from alien import Alien
 
 class AlienInvasion:
@@ -33,8 +34,12 @@ class AlienInvasion:
         #de self.ship'in olması gerekiyor. Python burada C++'daki member init'i
         #mi kullanıyor? -implictly olarak-
         #self.ship in en sonda mı olması gerekiyor?Çünkü Ship(AlienInvasion)?
+        self.ship_sprite_group = pygame.sprite.Group()
         self.ship = Ship(self)
+        self.ship_sprite_group.add(self.ship)
+
         self.bullets = pygame.sprite.Group()
+        self.alien_bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
@@ -61,6 +66,7 @@ class AlienInvasion:
             if self.stats.game_active:
                 self.ship.update()
                 self._update_bullets()
+                self._update_alien_bullets()
                 self._update_aliens()
                 
             self._update_screen()
@@ -109,6 +115,7 @@ class AlienInvasion:
         # Get rid of any remaining aliens and bullets.
         self.aliens.empty()
         self.bullets.empty()
+        self.alien_bullets.empty()
 
         # Create a new fleet and center the ship.
         self._create_fleet()
@@ -296,7 +303,36 @@ class AlienInvasion:
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
         alien.rect.y = alien_height + 2 * alien.rect.height * row_number
+        random_number = randint(0, 15)
+        if random_number == alien_number * row_number:
+            print(random_number, alien_number * row_number)
+        if random_number == alien_number * row_number:
+            if len(self.bullets) < 1:
+                new_bullet = AlienBullet(self, alien)
+                self.alien_bullets.add(new_bullet)
         self.aliens.add(alien)
+
+    def _update_alien_bullets(self):
+        """Update position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        self.alien_bullets.update()
+
+        screen_rect = self.screen.get_rect()
+        # Get rid of bullets that have disappeared.
+        for bullet in self.alien_bullets.copy():
+            if bullet.rect.top >= screen_rect.bottom:
+                # Buradaki remove destucre'ı nasıl çağırıyor?
+                self.alien_bullets.remove(bullet)
+
+        self._check_bullet_ship_collisions()
+
+    def _check_bullet_ship_collisions(self):
+        collisions = pygame.sprite.groupcollide(
+                self.ship_sprite_group, self.alien_bullets, True, True)
+
+        if collisions:
+            for aliens in collisions.values():
+                self._ship_hit()
 
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge."""
@@ -320,6 +356,8 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        for alien_bullet in self.alien_bullets.sprites():
+            alien_bullet.draw_bullet()
 
         self.aliens.draw(self.screen)
 
