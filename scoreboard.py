@@ -19,6 +19,12 @@ class Scoreboard:
         self.font = pygame.font.SysFont(None, 38)
 
         # Prepare the initial score images.
+        self._prep_images()
+
+    def _prep_images(self):
+        """alien_invasion.py'de ki _check_play_button() ve start_game()
+        basitleştiremedim çünkü bu seferde extra method çağrısı yapılarak
+        verimsizlik oluşuyor"""
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
