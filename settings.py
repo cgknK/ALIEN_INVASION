@@ -10,7 +10,7 @@ class Settings:
             'white' : (250, 250, 250)
             }
 
-        resulutions = [ (800, 600), (500, 500)]
+        resulutions = [(1366, 768) ,(800, 600), (500, 500)]
 
         image_paths = {
             'ship' : 'images/ship.bmp',
@@ -51,7 +51,8 @@ class Settings:
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
         if self.difficulty_level == 'easy':
-            self.ship_speed = 0.5
+            self.ship_speed_x = 0.5
+            self.ship_speed_y = 0.35
             self.ship_limit = 5
             self.bullets_allowed = 10
             self.bullet_speed = 2
@@ -59,9 +60,10 @@ class Settings:
             # Scoring
             self.alien_points = 50
         elif self.difficulty_level == 'hard':
+            self.ship_speed_x = 0.8
+            self.ship_speed_y = 0
             self.ship_limit = 3
             self.bullets_allowed = 3
-            self.ship_speed = 1
             self.bullet_speed = 2.5
             self.alien_speed = 0.3
             # Scoring
@@ -72,7 +74,7 @@ class Settings:
 
     def increase_speed(self):
         """Increase speed settings."""
-        self.ship_speed *= self.speedup_scale
+        self.ship_speed_y *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
         self.alien_points = int(self.alien_points * self.score_scale)

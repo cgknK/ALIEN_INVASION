@@ -10,7 +10,7 @@ from game_stats import GameStats
 from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
-from bullet import Bullet, AlienBullet
+from bullet import Bullet, AlienBullet, BulletYuvarlak
 from alien import Alien
 
 class AlienInvasion:
@@ -174,7 +174,12 @@ class AlienInvasion:
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
         if len(self.bullets) < self.settings.bullets_allowed:
-            new_bullet = Bullet(self)
+            #new_bullet = Bullet(self)
+            new_bullet = BulletYuvarlak(self,-1)
+            self.bullets.add(new_bullet)
+            new_bullet = BulletYuvarlak(self,0)
+            self.bullets.add(new_bullet)
+            new_bullet = BulletYuvarlak(self,1)
             self.bullets.add(new_bullet)
 
     def _update_bullets(self):

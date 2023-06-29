@@ -35,17 +35,17 @@ class Ship(Sprite):
         """Update the ship's position based on the movement flag."""
         # Update the ship's x value, not the rect.
         if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.x += self.settings.ship_speed
+            self.x += self.settings.ship_speed_x
         if self.moving_left and self.rect.left > 0:
-            self.x -= self.settings.ship_speed
+            self.x -= self.settings.ship_speed_x
 
         # Update the ship's y value, not the rect.
         if self.moving_up and self.rect.top > 0:
-            self.y -= self.settings.ship_speed
+            self.y -= self.settings.ship_speed_y
         # Burada ilişkisel operatörde neden <= kullanılmış, görünürde hiç bir
         #şey değişmiyor?
         if self.moving_down and self.rect.bottom <= self.screen_rect.bottom:
-            self.y += self.settings.ship_speed
+            self.y += self.settings.ship_speed_y
         
         # Update rect object from self.x and self.y
         self.rect.x = self.x
