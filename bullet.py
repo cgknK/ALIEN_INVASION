@@ -42,11 +42,11 @@ class AlienBullet(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
-        self.color = self.settings.bullet_color
+        self.color = self.settings.bullet_color_alien
 
         # Create a bullet rect at (0, 0) and then set correct position.
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width,
-                            self.settings.bullet_height)
+                            self.settings.bullet_height*7.5)
         self.rect.midtop = alien_this.rect.midtop
 
         # Store the bullet's position as a decimal value.
@@ -64,12 +64,13 @@ class AlienBullet(Sprite):
         """Draw the bullet to the screen."""
         pygame.draw.rect(self.screen, self.color, self.rect)
 
-
+# isim anlamsız değiştirilecek, refactoring yapılacak
 class BulletYuvarlak(Sprite):
     """Create a bullet object at the ship's current position."""
-    def __init__(self, ai_game, mTip):
+    def __init__(self, ai_game, mTip, yan):
         super().__init__()
         self.mermiTip = mTip
+        self.yan = yan
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.color = self.settings.bullet_color
@@ -94,10 +95,16 @@ class BulletYuvarlak(Sprite):
         self.y -= self.settings.bullet_speed
         if self.mermiTip == -1:
             self.x += self.settings.bullet_speed * 0.1
+            if self.yan == 1:
+                self.x += self.settings.bullet_speed
+                self.y += self.settings.bullet_speed
         elif self.mermiTip == 0:
             pass
-        else:
+        elif self.mermiTip == 1:
             self.x -= self.settings.bullet_speed * 0.1
+            if self.yan == 1:
+                self.x -= self.settings.bullet_speed
+                self.y += self.settings.bullet_speed
 
         # Update the rect position.
         self.rect.y = self.y

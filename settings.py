@@ -18,8 +18,8 @@ class Settings:
             }
 
         # Screen settings
-        self.screen_width = resulutions[0][0]
-        self.screen_height = resulutions[0][1]
+        self.screen_width = resulutions[1][0]
+        self.screen_height = resulutions[1][1]
         self.value_current_window = "Alien Invasion"
         self.bg_color = bg_colors['grey']
 
@@ -31,6 +31,7 @@ class Settings:
         self.bullets = [ [3, 15], [300, 15], [3000, 15] ]
         self.bullet_width, self.bullet_height = self.bullets[0]
         self.bullet_color = (60, 60, 60)
+        self.bullet_color_alien = (30, 30, 140)
         self.bullets_allowed = 3
 
         # Alien settings
@@ -61,7 +62,7 @@ class Settings:
             self.alien_points = 50
         elif self.difficulty_level == 'hard':
             self.ship_speed_x = 0.8
-            self.ship_speed_y = 0
+            self.ship_speed_y = 0.3
             self.ship_limit = 3
             self.bullets_allowed = 3
             self.bullet_speed = 2.5
