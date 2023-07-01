@@ -10,7 +10,7 @@ class Settings:
             'white' : (250, 250, 250)
             }
 
-        resulutions = [(1366, 768) ,(800, 600), (500, 500)]
+        resulutions = [(1366, 768) ,(800, 600), (500, 500), (0, 0)]
 
         image_paths = {
             'ship' : 'images/ship.bmp',
