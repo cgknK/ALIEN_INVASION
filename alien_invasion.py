@@ -23,8 +23,8 @@ class AlienInvasion:
         self.settings = Settings()
         if self.settings.screen_width == 0 or self.settings.screen_height == 0:
             self.screen = pygame.display.set_mode((0,0),(pygame.FULLSCREEN))
-            #self.settings.screen_width = self.screen.get_rect().width
-            #self.settings.screen_height = self.screen.get_rect().height
+            self.settings.screen_width = self.screen.get_rect().width
+            self.settings.screen_height = self.screen.get_rect().height
         else:
             self.screen = pygame.display.set_mode(
                     (self.settings.screen_width, self.settings.screen_height))
@@ -152,7 +152,7 @@ class AlienInvasion:
             self._save_and_exit()
         elif event.key == pygame.K_p and not self.stats.game_active:
             self._start_game()
-        print("event.key",event.key)#event.key 27 -> esc
+        #print("event.key",event.key)#event.key 27 -> esc
 
     def _save_and_exit(self):
         """Save high score and exit."""
@@ -178,6 +178,7 @@ class AlienInvasion:
         elif event.key == pygame.K_DOWN:
             self.ship.moving_down = False
 
+    #refaktor
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
         if len(self.bullets) < self.settings.bullets_allowed:
@@ -192,8 +193,10 @@ class AlienInvasion:
             self.bullets.add(new_bullet)
             new_bullet = BulletMulti(self,1,1)
             self.bullets.add(new_bullet)
+        #settings.bullets_allowed = 0 ise hiç mermi atamaz
+        #settings.bullets_allowed = 0.5 bile olsa sınırsız
         #settings.bullets_allowed limitlemesi çalışmıyor, düzeltilecek.
-        print("total_fire_bullet", len(self.bullets))
+        #print("total_fire_bullet", len(self.bullets))
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
@@ -223,7 +226,7 @@ class AlienInvasion:
         draw graphics to the game window.
         _Neden terminale birşey yazdırmak daha çok zaman alıyor?
         """
-        #print(len(self.bullets))
+        print(len(self.bullets))
 
         self._check_bullet_alien_collisions()
 
@@ -273,6 +276,7 @@ class AlienInvasion:
         """Check if any aliens have reached the bottom of the screen."""
         screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
+            # Biraz esneme payı verilebilir
             if alien.rect.bottom >= screen_rect.bottom:
                 # Treat this the same as if the ship got hit.
                 self._ship_hit()
@@ -303,9 +307,14 @@ class AlienInvasion:
         """Create the fleet of aliens."""
         # Create an alien and find the number of aliens in a row.
         # Spacing between each alien is equal to one alien width.
+
+        # Bu alien destructure çağrılıyor mu? yani yok ediliyor mu? Evet.
         alien = Alien(self)
+        alien.no = -1
         alien_width, alien_height = alien.rect.size
 
+        # Bu degiskenler eğer çok ağır hesaplamalar içerseydi self.degiskenler
+        #yapıp 1 kere hesaplanması sağlanır mıydı?
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
 
@@ -331,8 +340,8 @@ class AlienInvasion:
         alien.rect.y = alien_height + 2 * alien.rect.height * row_number
         random_number = randint(0, 15)
         if random_number == alien_number * row_number:
-            print(random_number, alien_number * row_number)
-        if random_number == alien_number * row_number:
+            alien.is_active = True
+            # bu if anlamsız, neden koymuşum
             if len(self.bullets) < 1:
                 new_bullet = AlienBullet(self, alien)
                 self.alien_bullets.add(new_bullet)
@@ -349,6 +358,14 @@ class AlienInvasion:
             if bullet.rect.top >= screen_rect.bottom:
                 # Buradaki remove destucre'ı nasıl çağırıyor?
                 self.alien_bullets.remove(bullet)
+
+        #1_000_000, 999_983 veya ihtimalin yanına min bekleme süresi
+        random_number = randint(0, 1_000_000)
+        for alien in self.aliens.sprites():
+            if alien.is_active and random_number >= 999_909:
+                if len(self.alien_bullets) < 1:
+                    new_bullet = AlienBullet(self, alien)
+                    self.alien_bullets.add(new_bullet)
 
         self._check_bullet_ship_collisions()
 

@@ -46,7 +46,7 @@ class AlienBullet(Sprite):
 
         # Create a bullet rect at (0, 0) and then set correct position.
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width,
-                            self.settings.bullet_height*7.5)
+                            self.settings.bullet_height * 3)
         self.rect.midtop = alien_this.rect.midtop
 
         # Store the bullet's position as a decimal value.
@@ -55,7 +55,7 @@ class AlienBullet(Sprite):
     def update(self):
         """Move the bullet up the screen."""
         # Update the decimal position of the bullet.
-        self.y += 0.5
+        self.y += 0.375
 
         # Update the rect position.
         self.rect.y = self.y
@@ -64,7 +64,8 @@ class AlienBullet(Sprite):
         """Draw the bullet to the screen."""
         pygame.draw.rect(self.screen, self.color, self.rect)
 
-# isim anlamsız değiştirilecek, refactoring yapılacak
+
+# refactoring yapılacak
 class BulletMulti(Sprite):
     """Create a bullet object at the ship's current position."""
     def __init__(self, ai_game, mTip, yan):

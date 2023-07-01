@@ -30,12 +30,12 @@ class Settings:
         # Bullet settings
         self.bullets = [ [3, 15], [300, 15], [3000, 15] ]
         self.bullet_width, self.bullet_height = self.bullets[0]
-        self.bullet_color = (60, 60, 60)
+        self.bullet_color = (45, 45, 45)
         self.bullet_color_alien = (30, 30, 140)
         self.bullets_allowed = 3
 
         # Alien settings
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 12
 
         # How quickly the game speeds up
         """We include fleet_direction in this method so the aliens always move 
@@ -64,9 +64,9 @@ class Settings:
             self.ship_speed_x = 0.8
             self.ship_speed_y = 0.35
             self.ship_limit = 3
-            self.bullets_allowed = 3
+            self.bullets_allowed = 0.5
             self.bullet_speed = 2.5
-            self.alien_speed = 0.3
+            self.alien_speed = 0.25
             # Scoring
             self.alien_points = int(50 ** 0.43) + 50
 
