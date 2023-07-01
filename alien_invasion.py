@@ -20,9 +20,14 @@ class AlienInvasion:
         """Initialize the game, and create game resources."""
         pygame.init()
         self.settings = Settings()
-
+        """
         self.screen = pygame.display.set_mode(
                 (self.settings.screen_width, self.settings.screen_height))
+        """
+        self.screen = pygame.display.set_mode((0,0),(pygame.FULLSCREEN))
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
+
         self.value_current_window = self.settings.value_current_window
         pygame.display.set_caption(self.value_current_window)
 

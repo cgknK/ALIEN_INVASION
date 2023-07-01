@@ -28,16 +28,24 @@ class Ship(Sprite):
         self.moving_up = False
         self.moving_down = False
 
+        self.count = 0
+
     """The update() method will be called through an instance of Ship, so
     it’s not considered a helper method. _Anlamadım
     """
     def update(self):
         """Update the ship's position based on the movement flag."""
         # Update the ship's x value, not the rect.
-        if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.x += self.settings.ship_speed_x
-        if self.moving_left and self.rect.left > 0:
-            self.x -= self.settings.ship_speed_x
+        if self.moving_right:
+            if self.rect.left < self.screen_rect.right:
+                self.x += self.settings.ship_speed_x
+            else:
+                self. x = self.screen_rect.left
+        if self.moving_left:
+            if self.rect.right > 0:
+                self.x -= self.settings.ship_speed_x
+            else:
+                self.x = self.screen_rect.right
 
         # Update the ship's y value, not the rect.
         if self.moving_up and self.rect.top > 0:
