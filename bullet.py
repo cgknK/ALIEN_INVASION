@@ -65,7 +65,7 @@ class AlienBullet(Sprite):
         pygame.draw.rect(self.screen, self.color, self.rect)
 
 # isim anlamsız değiştirilecek, refactoring yapılacak
-class BulletYuvarlak(Sprite):
+class BulletMulti(Sprite):
     """Create a bullet object at the ship's current position."""
     def __init__(self, ai_game, mTip, yan):
         super().__init__()

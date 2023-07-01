@@ -62,7 +62,7 @@ class Settings:
             self.alien_points = 50
         elif self.difficulty_level == 'hard':
             self.ship_speed_x = 0.8
-            self.ship_speed_y = 0.3
+            self.ship_speed_y = 0.35
             self.ship_limit = 3
             self.bullets_allowed = 3
             self.bullet_speed = 2.5

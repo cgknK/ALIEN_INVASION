@@ -10,7 +10,7 @@ from game_stats import GameStats
 from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
-from bullet import Bullet, AlienBullet, BulletYuvarlak
+from bullet import Bullet, AlienBullet, BulletMulti
 from alien import Alien
 
 class AlienInvasion:
@@ -182,17 +182,18 @@ class AlienInvasion:
         """Create a new bullet and add it to the bullets group."""
         if len(self.bullets) < self.settings.bullets_allowed:
             #new_bullet = Bullet(self)
-            new_bullet = BulletYuvarlak(self,-1,0)
+            new_bullet = BulletMulti(self,-1,0)
             self.bullets.add(new_bullet)
-            new_bullet = BulletYuvarlak(self,0,0)
+            new_bullet = BulletMulti(self,0,0)
             self.bullets.add(new_bullet)
-            new_bullet = BulletYuvarlak(self,1,0)
+            new_bullet = BulletMulti(self,1,0)
             self.bullets.add(new_bullet)
-            new_bullet = BulletYuvarlak(self,-1,1)
+            new_bullet = BulletMulti(self,-1,1)
             self.bullets.add(new_bullet)
-            new_bullet = BulletYuvarlak(self,1,1)
+            new_bullet = BulletMulti(self,1,1)
             self.bullets.add(new_bullet)
-            print("fire",len(self.bullets))
+        #settings.bullets_allowed limitlemesi çalışmıyor, düzeltilecek.
+        print("total_fire_bullet", len(self.bullets))
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
@@ -207,14 +208,14 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 # Buradaki remove destucre'ı nasıl çağırıyor?
                 self.bullets.remove(bullet)
-                print("update1", len(self.bullets))
+                #print("update1", len(self.bullets))
             #update2 'ye hiç girmiyor
             onerme1 = bullet.rect.left >= self.screen.get_rect().right
             onerme2 = bullet.rect.right <= self.screen.get_rect().left
             if onerme1 or onerme2:
                 # Buradaki remove destucre'ı nasıl çağırıyor?
                 self.bullets.remove(bullet)
-                print("update2", len(self.bullets))
+                #print("update2", len(self.bullets))
 
         """
         If you leave it in, the game will slow down significantly because 
