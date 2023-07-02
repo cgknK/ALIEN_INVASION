@@ -15,7 +15,7 @@ Eric Matthes,
 - uzaylı gemilerinin mermi atma mekanigi düzeltilecek
 - refactoring yapılacak
 - exe ile sarmalacanak veya python pyinstaller
-- web'e pyinstaller vb birşey bak
+- web'e pyinstaller vb birşey bak(pygbag)
 - Fullscreen kısayolu(f)
 - 1_000_000, 999_983 ayarlacak olmadı ihtimalin yanına min bekleme süresi
     geçici çözüm limit
