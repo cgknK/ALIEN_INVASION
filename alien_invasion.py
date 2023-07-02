@@ -152,6 +152,10 @@ class AlienInvasion:
             self._save_and_exit()
         elif event.key == pygame.K_p and not self.stats.game_active:
             self._start_game()
+        elif event.key == pygame.K_h:
+            self.settings.difficulty_level = 'hard'
+        elif event.key == pygame.K_e:
+            self.settings.difficulty_level = 'easy'
         #print("event.key",event.key)#event.key 27 -> esc
 
     def _save_and_exit(self):

@@ -9,8 +9,9 @@ class Button:
 
         # Set the dimensions and properties of the button.
         self.width, self.height = 200, 50
-        self.button_color = (0, 255, 0)
-        self.text_color = (255, 255, 255)
+        self.button_color = (15, 125, 15)
+        self.button_click_color = (50,50,15)
+        self.text_color = (240, 230, 220)
         self.font = pygame.font.SysFont(None, 48)
 
         # Build the button's rect object and center it.
@@ -26,6 +27,13 @@ class Button:
         """Turn msg into a rendered image and center text on the button."""
         self.msg_image = self.font.render(msg, True, 
                 self.text_color, self.button_color)
+        self.msg_image_rect = self.msg_image.get_rect()
+        self.msg_image_rect.center = self.rect.center
+
+    # Tamamlanmadı
+    def on_click(self):
+        self.msg_image = self.font.render("", True, 
+                self.button_click_color, self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center
 
