@@ -366,7 +366,7 @@ class AlienInvasion:
         #1_000_000, 999_983 veya ihtimalin yanına min bekleme süresi
         random_number = randint(0, 1_000_000)
         for alien in self.aliens.sprites():
-            if alien.is_active and random_number >= 999_909:
+            if alien.is_active and random_number >= 999_000:#999_909:
                 if len(self.alien_bullets) < 1:
                     new_bullet = AlienBullet(self, alien)
                     self.alien_bullets.add(new_bullet)

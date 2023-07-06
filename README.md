@@ -8,6 +8,7 @@ Eric Matthes,
 ? _check_events()'deki elifler nasıl her biri ayrı if gibi çalışıyor?
 ? neden terminale print yazdırmak yavaş?
 
+- düsman mermileri bazen zarar vermiyor ve geminin üzerinden geçip gidiyor.
 - settings.bullets_allowed limitlemesi çalışmıyor, düzeltilecek.(_fire_bullet())
 - test_ eklenecek
 - Help butonu eklenecek
