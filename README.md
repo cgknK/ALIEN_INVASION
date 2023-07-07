@@ -9,6 +9,7 @@ Eric Matthes,
 ? neden terminale print yazdırmak yavaş?
 
 - düsman mermileri bazen zarar vermiyor ve geminin üzerinden geçip gidiyor.
+- tamEkran olunca ayarları optimize eden birşey koy.
 - settings.bullets_allowed limitlemesi çalışmıyor, düzeltilecek.(_fire_bullet())
 - test_ eklenecek
 - Help butonu eklenecek
@@ -20,6 +21,7 @@ Eric Matthes,
 - Fullscreen kısayolu(f)
 - 1_000_000, 999_983 ayarlacak olmadı ihtimalin yanına min bekleme süresi
     geçici çözüm limit
+- mobile ivmeölçer ile birşey yapılabilir
 
 + gemi soldan sağa ve sağdan sola geçişlilik özelliği eklenecek
 
